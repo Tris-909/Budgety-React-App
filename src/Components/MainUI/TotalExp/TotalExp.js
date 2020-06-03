@@ -3,10 +3,10 @@ import styled from 'styled-components';
 
 const Exp = styled.div`
     background-color: #FF5049;
-    width: 30%;
+    width: 35%;
     display: flex;
     position: relative;
-    left: 35%;  
+    left: 33%;  
     margin-top: 20px;
 `;
 
@@ -20,16 +20,21 @@ const String = styled.p`
 const Number = styled.p`
     color: white;
     position: relative;
-    left: 200px;
+    left: 55%;
     font-size: 16px;
 `;
 
 const Percentages = styled.p`
     color: white;
-    margin-left: 25px;
+    text-align: center;
     position: relative;
-    left: 200px;
+    left: 60%;
     font-size: 16px;
+    float: left;
+    width: 60px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+    margin-left: 10px
 `;
 
 const totalExp = (props) => {
@@ -37,7 +42,7 @@ const totalExp = (props) => {
         <Exp>
             <String>expense</String>
             <Number>- {props.totalExp}</Number>
-            <Percentages>{props.percentages} %</Percentages>
+            <Percentages>{props.percentages === "NaN" ? null : props.percentages + ' %'}</Percentages>
         </Exp>
     );
 }

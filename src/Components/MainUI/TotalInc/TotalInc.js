@@ -3,10 +3,10 @@ import styled from 'styled-components';
 
 const Inc = styled.div`
     background-color: #28B9B5;
-    width: 30%;
+    width: 35%;
     display: flex;
     position: relative;
-    left: 35%;
+    left: 33%;
 `;
 
 const Text = styled.p`
@@ -19,7 +19,7 @@ const Text = styled.p`
 const Number = styled.p`
     color: white;
     position: relative;
-    left: 200px;
+    left: 75%;
     font-size: 16px;
 `;
 

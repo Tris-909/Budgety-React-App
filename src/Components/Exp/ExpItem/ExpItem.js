@@ -18,7 +18,7 @@ const RightContainer = styled.div`
 `;
 
 const ItemValue = styled.div`
-    color: #28B9B5;
+    color: #FF5049;
     margin-right: 10px;
 `;
 
@@ -33,17 +33,16 @@ const DeleteButton = styled.button`
     background-image: url(${trash});
 `;
 
-
-const SingleIncItem = (props) => {
+const ExpItem = (props) => {
     return(
         <ContainerOfSingleItem key={props.id}>
             <Description>{props.description}</Description>
             <RightContainer>
-                <ItemValue>+ {props.value}</ItemValue>
-                <DeleteButton />
+            <ItemValue>- {props.value}</ItemValue>
+            <DeleteButton/>
             </RightContainer>
         </ContainerOfSingleItem>
     );
-} 
+}
 
-export default SingleIncItem;
+export default ExpItem;

@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import icon from '../../Image/confirm.svg';
+import * as actions from '../../store/action/actions';
+import {connect} from 'react-redux';
 
 const AddBarStyled = styled.div`
     padding: 14px;
@@ -68,11 +70,9 @@ const Position = styled.div`
 
 class AddBar extends Component {
     state = {
-        IncArray: [],
-        ExpArray: [],
         singleItem: {
             des: '',
-            val: '0', 
+            val: '', 
             id: Math.random()
         },
         isPlus: true
@@ -103,17 +103,9 @@ class AddBar extends Component {
     onClickHandler = (isPlus) => {
         let newItem = {...this.state.singleItem}
         if (isPlus) {
-            let newArray = [...this.state.IncArray];
-            newArray.push(newItem);
-            this.setState({
-                IncArray: newArray
-            });
+            this.props.AddPersonPlus(newItem);
         } else {
-            let newArray = [...this.state.ExpArray];
-            newArray.push(newItem);;
-            this.setState({
-                ExpArray: newArray
-            });
+            this.props.AddPersonMinus(newItem);
         }
         let Emptyobj = {
             des: '',
@@ -123,10 +115,6 @@ class AddBar extends Component {
         this.setState({
             singleItem: Emptyobj
         });
-    }
-
-    showState = () => {
-        console.log(this.state);
     }
 
     render(){
@@ -140,11 +128,24 @@ class AddBar extends Component {
                     <AddDescription type="text" placeholder="Add descripttion" onChange={(event) => this.onTypeChangeHandler(event)} value={this.state.singleItem.des}/>
                     <AddValue type="number" placeholder="Value" onChange={(event) => this.onValueChangeHandler(event)} value={this.state.singleItem.val} />
                     <AddButton onClick={() => this.onClickHandler(this.state.isPlus)}/>
-                    <button onClick={this.showState}>watch state</button>
                 </Position>
             </AddBarStyled>
         );
     }
 }
 
-export default AddBar;
+const mapStateToProps = state => {
+    return {
+        IncList: state.IncList,
+        ExpList: state.ExpList
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        AddPersonPlus: (newItem) => dispatch(actions.addPersonPlus(newItem)),
+        AddPersonMinus: (newItem) => dispatch(actions.addPersonMinus(newItem))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddBar);
