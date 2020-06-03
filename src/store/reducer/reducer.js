@@ -40,14 +40,30 @@ const reducer = (state = initialState, action) => {
                 TotalExp: ShortNumberMinus
             }
         case(actionTypes.REMOVE_PERSON_PLUS):
+            let newArray = state.IncList.filter(inc => inc.id !== action.id);
+            let UpdateTotalPlus = 0;
+            newArray.map(item => {
+                let curValue = parseFloat(item.val);
+                return UpdateTotalPlus += curValue;
+            });
+            let UpdateShortNumberPlus = Math.round(UpdateTotalPlus * 1000)/1000;
             return {
                 ...state,
-                IncList: state.IncList.filter(inc => inc.id !== action.id)
+                IncList: newArray,
+                TotalInc: UpdateShortNumberPlus
             }
         case(actionTypes.REMOVE_PERSON_MINUS):
+            let MinusDeleteArray =  state.ExpList.filter(exp => exp.id !== action.id);
+            let UpdateTotalMinus = 0;
+            MinusDeleteArray.map(item => {
+                let curValue = parseFloat(item.val);
+                return UpdateTotalMinus += curValue;
+            });
+            let UpdateShortNumberMinus = Math.round(UpdateTotalMinus * 1000)/1000;
             return {
                 ...state,
-                ExpList: state.ExpList.filter(exp => exp.id !== action.id)
+                ExpList: MinusDeleteArray,
+                TotalExp: UpdateShortNumberMinus
             }
         default: 
             return state
