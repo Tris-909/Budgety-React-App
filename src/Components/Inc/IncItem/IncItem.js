@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import trash from '../../../Image/cross.svg';
 
 const ContainerOfSingleItem = styled.div`
@@ -22,6 +22,18 @@ const ItemValue = styled.div`
     margin-right: 10px;
 `;
 
+const HoverDeleteAnimation = keyframes`
+    0% {
+        transform: translateY(5px);
+    }
+    50% {
+        transform: translate(-5px);
+    }
+    100% {
+        transform: traslateY(0);
+    }
+`;
+
 const DeleteButton = styled.button`
     width: 20px;
     height: 20px;   
@@ -31,7 +43,12 @@ const DeleteButton = styled.button`
     background-size: 20px 20px;
     background-color: white;
     background-image: url(${trash});
+
+    &:hover {
+        animation: ${HoverDeleteAnimation} .5s ease-out;
+    }
 `;
+
 
 
 const SingleIncItem = (props) => {
