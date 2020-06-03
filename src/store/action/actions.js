@@ -13,3 +13,17 @@ export const addPersonMinus = (newItem) => {
         newItem: newItem
     }
 }
+
+export const deletePersonPlus = (id) => {
+    return {
+        type: actionTypes.REMOVE_PERSON_PLUS,
+        id: id
+    }
+}
+
+export const deletePersonMinus = (id) => {
+    return {
+        type: actionTypes.REMOVE_PERSON_MINUS,
+        id: id
+    }
+}

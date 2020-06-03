@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 import ExpItem from './ExpItem/ExpItem';
+import * as actions from '../../store/action/actions';
 
 const Expense = styled.div`
     float: left;
@@ -18,7 +19,7 @@ const ExpText = styled.h2`
 
 const ExpItems = (props) => {
     let content = props.ExpList.map(data => {
-        return <ExpItem id={data.id} description={data.des} value={data.value}/>
+        return <ExpItem key={data.id} id={data.id} description={data.des} value={data.val} delete={() => props.deleteSingleItem(data.id)}/>
     });
     
     return(
@@ -35,4 +36,10 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, null)(ExpItems)
+const mapDispatchToProps = dispatch => {
+    return {
+        deleteSingleItem: (id) => dispatch(actions.deletePersonMinus(id))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ExpItems)

@@ -36,11 +36,11 @@ const DeleteButton = styled.button`
 
 const SingleIncItem = (props) => {
     return(
-        <ContainerOfSingleItem key={props.id}>
+        <ContainerOfSingleItem>
             <Description>{props.description}</Description>
             <RightContainer>
                 <ItemValue>+ {props.value}</ItemValue>
-                <DeleteButton />
+                <DeleteButton onClick={props.delete}/>
             </RightContainer>
         </ContainerOfSingleItem>
     );

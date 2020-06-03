@@ -15,13 +15,14 @@ const reducer = (state = initialState, action) => {
             newArrayOfPlus.push(newItemOfPlus);
             let totalPlus = 0;
             newArrayOfPlus.map(item => {
-                let curValue = parseInt(item.val);
+                let curValue = parseFloat(item.val);
                 return totalPlus += curValue;
             });
+            let ShortNumberPlus = Math.round(totalPlus * 1000)/1000;
             return {
                 ...state,
                 IncList: [].concat(newArrayOfPlus),
-                TotalInc: totalPlus 
+                TotalInc: ShortNumberPlus 
             }
         case(actionTypes.ADD_PERSON_MINUS):
             let newItemOfMinus = action.newItem;
@@ -29,13 +30,14 @@ const reducer = (state = initialState, action) => {
             newArrayOfMinus.push(newItemOfMinus);
             let totalMinus =  0;
             newArrayOfMinus.map(item => {
-                let curValue = parseInt(item.val);
+                let curValue = parseFloat(item.val);
                 return totalMinus += curValue;
             })
+            let ShortNumberMinus = Math.round(totalMinus * 1000)/1000;
             return {
                 ...state,
                 ExpList: [].concat(newArrayOfMinus),
-                TotalExp: totalMinus
+                TotalExp: ShortNumberMinus
             }
         case(actionTypes.REMOVE_PERSON_PLUS):
             return {

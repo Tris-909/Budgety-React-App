@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import IncItem from './IncItem/IncItem';
 import styled from 'styled-components';
 import {connect} from 'react-redux';
+import * as actions from '../../store/action/actions';
 
 const Income = styled.div`
     float: left;
@@ -20,7 +21,7 @@ const TextInc = styled.h2`
 class IncItems extends Component {
     render(){
         let content = this.props.IncList.map(data => {
-            return <IncItem id={data.id} description={data.des} value={data.val}/>
+            return <IncItem key={data.id} description={data.des} value={data.val} delete={() => this.props.deleteSingleItem(data.id)}/>
         });
         return(
             <Income>
@@ -37,4 +38,10 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, null)(IncItems);
+const mapDispatchToProps = dispatch => {
+    return {
+        deleteSingleItem: (id) => dispatch(actions.deletePersonPlus(id))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(IncItems);
