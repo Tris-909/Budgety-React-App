@@ -7,7 +7,7 @@ import {connect} from 'react-redux';
 
 const Intro = styled.p`
     font-family: 'PT Sans';
-    font-size: 18px;
+    font-size: 30px;
     font-weight: 300;
     text-align: center;
     padding-top: 15px;

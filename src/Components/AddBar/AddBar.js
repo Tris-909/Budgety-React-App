@@ -61,11 +61,27 @@ const AddButton = styled.button`
     background-image: url(${icon});
     width: 30px;
     height: 30px;
+    outline: none;
+
+    &:hover, &:focus {
+        box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+        transform: translateY(-0.1em);
+    }
 `;
 
 const Position = styled.div`
     margin: 0 auto;
     text-align: center;
+`;
+
+const ErrorMessage = styled.div`
+    color: #f33131;
+    font-size: 15px;
+    font-family: 'PT Sans';
+    font-weight: bold;
+    display: inline-block;
+    margin-left: 20px;
+
 `;
 
 class AddBar extends Component {
@@ -75,7 +91,8 @@ class AddBar extends Component {
             val: '', 
             id: Math.random()
         },
-        isPlus: true
+        isPlus: true,
+        isValid: true
     }
     
     onTypeChangeHandler = (event) => {
@@ -127,7 +144,13 @@ class AddBar extends Component {
                 valid = false;
             }
         }
-        return valid;
+        if (curValueArray.length === 0) {
+            valid = false;
+        }
+        this.setState({
+            isValid: valid
+        });
+        console.log(this.state.isValid);
     } 
 
     render(){
@@ -141,11 +164,12 @@ class AddBar extends Component {
                     <AddDescription type="text" placeholder="Add descripttion" onChange={(event) => this.onTypeChangeHandler(event)} value={this.state.singleItem.des}/>
                     <AddValue type="number" placeholder="Value" onChange={(event) => this.onValueChangeHandler(event)} value={this.state.singleItem.val} />
                     <AddButton onClick={() => {
-                        let validity = this.checkValueValid();
-                        if (validity === true && this.state.singleItem.val !== '') {
-                            this.onClickHandler(this.state.isPlus)
+                        this.checkValueValid();
+                        if (this.state.isValid === true && this.state.singleItem.val !== '') {
+                            this.onClickHandler(this.state.isPlus);
                         }
                     }}/>
+                    {this.state.isValid === false ? <ErrorMessage>Invalid Input</ErrorMessage> : null}
                 </Position>
             </AddBarStyled>
         );
