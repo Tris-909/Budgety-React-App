@@ -38,6 +38,8 @@ class MainUI extends Component {
         const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
         let thisMonth =monthNames[date.getMonth()];
         let thisYear = date.getFullYear();
+        console.log(this.props.TotalOfIncome);
+        console.log(this.props.TotalOfExpense);
         return(
             <LayOut>
                 <Intro>Availabel Budget in {thisMonth} {thisYear} :</Intro>
@@ -53,8 +55,8 @@ class MainUI extends Component {
 
 const mapStateToProps = state => {
     return {
-        TotalOfIncome: JSON.parse(window.localStorage.getItem('IncomeTotal')),
-        TotalOfExpense: JSON.parse(window.localStorage.getItem('ExpenseTotal'))
+        TotalOfIncome: parseFloat(state.TotalInc),
+        TotalOfExpense: parseFloat(state.TotalExp)
     }
 }
 

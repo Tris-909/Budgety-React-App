@@ -37,7 +37,7 @@ class IncItems extends Component {
 
 const mapStateToProps = state => {
     return {
-        IncList: JSON.parse(window.localStorage.getItem('IncomeList'))
+        IncList: state.IncList
     }
 }
 

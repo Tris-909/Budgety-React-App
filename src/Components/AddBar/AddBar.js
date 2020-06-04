@@ -142,7 +142,6 @@ class AddBar extends Component {
                     <AddValue type="number" placeholder="Value" onChange={(event) => this.onValueChangeHandler(event)} value={this.state.singleItem.val} />
                     <AddButton onClick={() => {
                         let validity = this.checkValueValid();
-                        console.log(validity);
                         if (validity === true && this.state.singleItem.val !== '') {
                             this.onClickHandler(this.state.isPlus)
                         }

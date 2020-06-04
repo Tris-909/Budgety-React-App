@@ -1,10 +1,10 @@
 import  * as actionTypes from '../action/actionsTypes';
 
 const initialState = {
-    IncList: [],
-    ExpList: [],
-    TotalInc: 0,
-    TotalExp: 0
+    IncList: JSON.parse(window.localStorage.getItem('IncomeList')),
+    ExpList: JSON.parse(window.localStorage.getItem('ExpenseList')),
+    TotalInc: window.localStorage.getItem('IncomeTotal'),
+    TotalExp: window.localStorage.getItem('ExpenseTotal')
 }
 
 const reducer = (state = initialState, action) => {
