@@ -20,9 +20,12 @@ const TextInc = styled.h2`
 
 class IncItems extends Component {
     render(){
-        let content = this.props.IncList.map(data => {
-            return <IncItem key={data.id} description={data.des} value={data.val} delete={() => this.props.deleteSingleItem(data.id)}/>
-        });
+        let content = null;
+        if (this.props.IncList !== null) {
+            content = this.props.IncList.map(data => {
+                return <IncItem key={data.id} description={data.des} value={data.val} delete={() => this.props.deleteSingleItem(data.id)}/>
+            });
+        }
         return(
             <Income>
                 <TextInc>INCOME</TextInc>
@@ -34,7 +37,7 @@ class IncItems extends Component {
 
 const mapStateToProps = state => {
     return {
-        IncList: state.IncList
+        IncList: JSON.parse(window.localStorage.getItem('IncomeList'))
     }
 }
 

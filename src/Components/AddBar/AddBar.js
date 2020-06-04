@@ -117,6 +117,19 @@ class AddBar extends Component {
         });
     }
 
+    checkValueValid = () => {
+        let curValue = this.state.singleItem.val;
+        let curValueArray = curValue.split('');
+        let valid = true;
+        for (var i = 0; i < curValueArray.length; i++) {
+            let thisOne = curValueArray[i];
+            if (parseInt(thisOne) === "NaN") {
+                valid = false;
+            }
+        }
+        return valid;
+    } 
+
     render(){
         return(
             <AddBarStyled>
@@ -127,7 +140,13 @@ class AddBar extends Component {
                     </OptionButton>
                     <AddDescription type="text" placeholder="Add descripttion" onChange={(event) => this.onTypeChangeHandler(event)} value={this.state.singleItem.des}/>
                     <AddValue type="number" placeholder="Value" onChange={(event) => this.onValueChangeHandler(event)} value={this.state.singleItem.val} />
-                    <AddButton onClick={() => this.onClickHandler(this.state.isPlus)}/>
+                    <AddButton onClick={() => {
+                        let validity = this.checkValueValid();
+                        console.log(validity);
+                        if (validity === true && this.state.singleItem.val !== '') {
+                            this.onClickHandler(this.state.isPlus)
+                        }
+                    }}/>
                 </Position>
             </AddBarStyled>
         );

@@ -53,8 +53,8 @@ class MainUI extends Component {
 
 const mapStateToProps = state => {
     return {
-        TotalOfIncome: state.TotalInc,
-        TotalOfExpense: state.TotalExp
+        TotalOfIncome: JSON.parse(window.localStorage.getItem('IncomeTotal')),
+        TotalOfExpense: JSON.parse(window.localStorage.getItem('ExpenseTotal'))
     }
 }
 

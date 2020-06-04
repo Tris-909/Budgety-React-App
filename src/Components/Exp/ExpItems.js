@@ -18,10 +18,12 @@ const ExpText = styled.h2`
 `;
 
 const ExpItems = (props) => {
-    let content = props.ExpList.map(data => {
-        return <ExpItem key={data.id} id={data.id} description={data.des} value={data.val} delete={() => props.deleteSingleItem(data.id)}/>
-    });
-    
+    let content = null;
+    if (props.ExpList !== null) {
+        content = props.ExpList.map(data => {
+            return <ExpItem key={data.id} id={data.id} description={data.des} value={data.val} delete={() => props.deleteSingleItem(data.id)}/>
+        });
+    }
     return(
         <Expense>
             <ExpText>Expense</ExpText>
@@ -32,7 +34,7 @@ const ExpItems = (props) => {
 
 const mapStateToProps = state => {
     return {
-        ExpList: state.ExpList
+        ExpList: JSON.parse(window.localStorage.getItem('ExpenseList'))
     }
 }
 
