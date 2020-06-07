@@ -23,7 +23,7 @@ class IncItems extends Component {
         let content = null;
         if (this.props.IncList !== null) {
             content = this.props.IncList.map(data => {
-                return <IncItem key={data.id} description={data.des} value={data.val} delete={() => this.props.deleteSingleItem(data.id)}/>
+                return <IncItem key={data.id} time={data.time} description={data.des} value={data.val} delete={() => this.props.deleteSingleItem(data.id)}/>
             });
         }
         return(

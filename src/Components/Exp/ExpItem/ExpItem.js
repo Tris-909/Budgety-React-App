@@ -22,6 +22,12 @@ const ItemValue = styled.div`
     margin-right: 10px;
 `;
 
+const DayAndTime = styled.p`
+    color: #FF5049;
+    margin-right: 20px;
+    margin-top: 0px;
+`;
+
 const HoverButtonAnimation = keyframes`
     0% {
         transform: translateY(5px);
@@ -50,10 +56,12 @@ const DeleteButton = styled.button`
 `;
 
 const ExpItem = (props) => {
+
     return(
         <ContainerOfSingleItem>
             <Description>{props.description}</Description>
             <RightContainer>
+            <DayAndTime>{props.time}</DayAndTime>
             <ItemValue>- {props.value}</ItemValue>
             <DeleteButton onClick={props.delete}/>
             </RightContainer>

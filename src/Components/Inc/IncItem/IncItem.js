@@ -43,19 +43,24 @@ const DeleteButton = styled.button`
     background-size: 20px 20px;
     background-color: white;
     background-image: url(${trash});
-
+    outline: none;
     &:hover {
         animation: ${HoverDeleteAnimation} .5s ease-out;
     }
 `;
 
-
+const DayAndTime = styled.p`
+    color: #28B9B5;
+    margin-right: 20px;
+    margin-top: 0px;
+`;
 
 const SingleIncItem = (props) => {
     return(
         <ContainerOfSingleItem>
             <Description>{props.description}</Description>
             <RightContainer>
+            <DayAndTime>{props.time}</DayAndTime>
                 <ItemValue>+ {props.value}</ItemValue>
                 <DeleteButton onClick={props.delete}/>
             </RightContainer>

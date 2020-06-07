@@ -38,8 +38,6 @@ class MainUI extends Component {
         const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
         let thisMonth =monthNames[date.getMonth()];
         let thisYear = date.getFullYear();
-        console.log(this.props.TotalOfIncome);
-        console.log(this.props.TotalOfExpense);
         return(
             <LayOut>
                 <Intro>Availabel Budget in {thisMonth} {thisYear} :</Intro>

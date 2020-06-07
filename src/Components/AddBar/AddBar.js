@@ -88,7 +88,8 @@ class AddBar extends Component {
     state = {
         singleItem: {
             des: '',
-            val: '', 
+            val: '',
+            time: '', 
             id: Math.random()
         },
         isPlus: true,
@@ -118,7 +119,13 @@ class AddBar extends Component {
     }
 
     onClickHandler = (isPlus) => {
-        let newItem = {...this.state.singleItem}
+        let currentDate = new Date();
+        let date = currentDate.getDate();
+        let month = currentDate.getMonth(); //Be careful! January is 0 not 1
+        let year = currentDate.getFullYear();
+        const dateString = date + "/" +(month + 1) + "/" + year;
+
+        let newItem = {...this.state.singleItem, time: dateString.toString() }
         if (isPlus) {
             this.props.AddPersonPlus(newItem);
         } else {
@@ -127,6 +134,7 @@ class AddBar extends Component {
         let Emptyobj = {
             des: '',
             val: '',
+            time: '',
             id: Math.random()
         }
         this.setState({

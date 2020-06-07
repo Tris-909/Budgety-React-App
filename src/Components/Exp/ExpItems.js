@@ -21,7 +21,7 @@ const ExpItems = (props) => {
     let content = null;
     if (props.ExpList.length !== 0) {
         content = (props.ExpList).map(data => {
-            return <ExpItem key={data.id} id={data.id} description={data.des} value={data.val} delete={() => props.deleteSingleItem(data.id)}/>
+            return <ExpItem key={data.id} time={data.time} id={data.id} description={data.des} value={data.val} delete={() => props.deleteSingleItem(data.id)}/>
         });
     }
     return(
