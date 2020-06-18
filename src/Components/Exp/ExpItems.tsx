@@ -17,11 +17,22 @@ const ExpText = styled.h2`
     margin-bottom: 15px;
 `;
 
-const ExpItems = (props) => {
+interface Props {
+    ExpList: any[];
+    deleteSingleItem: Function;
+}
+
+const ExpItems: React.FC<Props> = (props) => {
     let content = null;
     if (props.ExpList.length !== 0) {
-        content = (props.ExpList).map(data => {
-            return <ExpItem key={data.id} time={data.time} id={data.id} description={data.des} value={data.val} delete={() => props.deleteSingleItem(data.id)}/>
+        content = (props.ExpList).map( (data) => { 
+            return <ExpItem 
+                key={data.id} 
+                time={data.time} 
+                id={data.id} 
+                description={data.des} 
+                value={data.val} 
+                delete={() => props.deleteSingleItem(data.id)}/>
         });
     }
     return(
@@ -32,15 +43,19 @@ const ExpItems = (props) => {
     );
 }
 
-const mapStateToProps = state => {
+interface State {
+    ExpList: any[];
+}
+
+const mapStateToProps = (state: State) => {
     return {
         ExpList: state.ExpList
     }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch: Function) => {
     return {
-        deleteSingleItem: (id) => dispatch(actions.deletePersonMinus(id))
+        deleteSingleItem: (id: number) => dispatch(actions.deletePersonMinus(id))
     }
 }
 

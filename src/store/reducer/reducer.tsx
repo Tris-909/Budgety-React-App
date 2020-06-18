@@ -1,30 +1,43 @@
 import  * as actionTypes from '../action/actionsTypes';
 
-const initialState = {
-    IncList: JSON.parse(window.localStorage.getItem('IncomeList')),
-    ExpList: JSON.parse(window.localStorage.getItem('ExpenseList')),
-    TotalInc: window.localStorage.getItem('IncomeTotal'),
-    TotalExp: window.localStorage.getItem('ExpenseTotal')
+interface initialState {
+    IncList: any[];
+    ExpList: any[];
+    TotalInc: string;
+    TotalExp: string;
 }
 
-const reducer = (state = initialState, action) => {
+const initialState: initialState = {
+    IncList: JSON.parse(window.localStorage.getItem('IncomeList')!),
+    ExpList: JSON.parse(window.localStorage.getItem('ExpenseList')!),
+    TotalInc: window.localStorage.getItem('IncomeTotal')!,
+    TotalExp: window.localStorage.getItem('ExpenseTotal')!
+}
+
+interface Action {
+    type: string;
+    newItem: object;
+    id: string;
+}
+
+const reducer = (state = initialState, action: Action) => {
     switch(action.type) {
         case(actionTypes.ADD_PERSON_PLUS):
             let newItemOfPlus = action.newItem;
             let newArrayOfPlus = [...state.IncList];
             newArrayOfPlus.push(newItemOfPlus);
             let totalPlus = 0;
-            newArrayOfPlus.map(item => {
+            newArrayOfPlus.map( (item) => {
                 let curValue = parseFloat(item.val);
                 return totalPlus += curValue;
             });
             let ShortNumberPlus = Math.round(totalPlus * 1000)/1000;
             // Add Items in LocalStorage so data won't be lost the next time you open the app
-            window.localStorage.setItem('IncomeList', JSON.stringify([].concat(newArrayOfPlus)));
-            window.localStorage.setItem('IncomeTotal', ShortNumberPlus);
+            window.localStorage.setItem('IncomeList', JSON.stringify([].concat(newArrayOfPlus as [])));
+            window.localStorage.setItem('IncomeTotal', ShortNumberPlus.toString());
             return {
                 ...state,
-                IncList: [].concat(newArrayOfPlus),
+                IncList: [].concat(newArrayOfPlus as []),
                 TotalInc: ShortNumberPlus 
             }
         case(actionTypes.ADD_PERSON_MINUS):
@@ -38,11 +51,11 @@ const reducer = (state = initialState, action) => {
             })
             let ShortNumberMinus = Math.round(totalMinus * 1000)/1000;
             // Add Items in LocalStorage so data won't be lost the next time you open the app
-            window.localStorage.setItem('ExpenseList', JSON.stringify([].concat(newArrayOfMinus)));
-            window.localStorage.setItem('ExpenseTotal', ShortNumberMinus);
+            window.localStorage.setItem('ExpenseList', JSON.stringify([].concat(newArrayOfMinus as [])));
+            window.localStorage.setItem('ExpenseTotal', ShortNumberMinus.toString());
             return {
                 ...state,
-                ExpList: [].concat(newArrayOfMinus),
+                ExpList: [].concat(newArrayOfMinus as []),
                 TotalExp: ShortNumberMinus
             }
         case(actionTypes.REMOVE_PERSON_PLUS):
@@ -55,7 +68,7 @@ const reducer = (state = initialState, action) => {
             let UpdateShortNumberPlus = Math.round(UpdateTotalPlus * 1000)/1000;
             // Add Items in LocalStorage so data won't be lost the next time you open the app
             window.localStorage.setItem('IncomeList', JSON.stringify(newArray));
-            window.localStorage.setItem('IncomeTotal', UpdateShortNumberPlus);
+            window.localStorage.setItem('IncomeTotal', UpdateShortNumberPlus.toString());
             return {
                 ...state,
                 IncList: newArray,
@@ -71,7 +84,7 @@ const reducer = (state = initialState, action) => {
             let UpdateShortNumberMinus = Math.round(UpdateTotalMinus * 1000)/1000;
             // Add Items in LocalStorage so data won't be lost the next time you open the app
             window.localStorage.setItem('ExpenseList', JSON.stringify(MinusDeleteArray));
-            window.localStorage.setItem('ExpenseTotal', UpdateShortNumberMinus);
+            window.localStorage.setItem('ExpenseTotal', UpdateShortNumberMinus.toString());
             return {
                 ...state,
                 ExpList: MinusDeleteArray,

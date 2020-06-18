@@ -31,13 +31,18 @@ const Percentages = styled.p`
     left: 60%;
     font-size: 16px;
     float: left;
-    width: 60px;
+    width: 70px;
     background-color: rgba(255, 255, 255, 0.2);
     border-radius: 3px;
     margin-left: 10px
 `;
 
-const totalExp = (props) => {
+interface Props {
+    totalExp: number;
+    percentages: number | string;
+}
+
+const totalExp: React.FC<Props> = (props) => {
     return(
         <Exp>
             <String>expense</String>

@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import trash from '../../../Image/cross.svg';
 
 const ContainerOfSingleItem = styled.div`
@@ -18,26 +18,8 @@ const RightContainer = styled.div`
 `;
 
 const ItemValue = styled.div`
-    color: #FF5049;
+    color: #28B9B5;
     margin-right: 10px;
-`;
-
-const DayAndTime = styled.p`
-    color: #FF5049;
-    margin-right: 20px;
-    margin-top: 0px;
-`;
-
-const HoverButtonAnimation = keyframes`
-    0% {
-        transform: translateY(5px);
-    }
-    50% {
-        transform: translate(-5px);
-    }
-    100% {
-        transform: traslateY(0);
-    }
 `;
 
 const DeleteButton = styled.button`
@@ -49,24 +31,35 @@ const DeleteButton = styled.button`
     background-size: 20px 20px;
     background-color: white;
     background-image: url(${trash});
-
-    &:hover {
-        animation: ${HoverButtonAnimation} .5s ease-out;
-    }
+    outline: none;
 `;
 
-const ExpItem = (props) => {
+const DayAndTime = styled.p`
+    color: #28B9B5;
+    margin-right: 20px;
+    margin-top: 0px;
+`;
 
+interface Props {
+    description: string;
+    time: string;
+    value: string;
+    delete: Function;
+    key: string;
+    id: string;
+}
+
+const SingleIncItem = (props: Props) => {
     return(
         <ContainerOfSingleItem>
             <Description>{props.description}</Description>
             <RightContainer>
             <DayAndTime>{props.time}</DayAndTime>
-            <ItemValue>- {props.value}</ItemValue>
-            <DeleteButton onClick={props.delete}/>
+                <ItemValue>+ {props.value}</ItemValue>
+                <DeleteButton onClick={() => props.delete()}/>
             </RightContainer>
         </ContainerOfSingleItem>
     );
-}
+} 
 
-export default ExpItem;
+export default SingleIncItem;

@@ -18,12 +18,17 @@ const TextInc = styled.h2`
     margin-bottom: 15px;
 `;
 
-class IncItems extends Component {
+interface Props {
+    IncList: any[];
+    deleteSingleItem: Function;
+}
+
+class IncItems extends Component<Props> {
     render(){
         let content = null;
         if (this.props.IncList !== null) {
             content = this.props.IncList.map(data => {
-                return <IncItem key={data.id} time={data.time} description={data.des} value={data.val} delete={() => this.props.deleteSingleItem(data.id)}/>
+                return <IncItem key={data.id} id={data.id} time={data.time} description={data.des} value={data.val} delete={() => this.props.deleteSingleItem(data.id)}/>
             });
         }
         return(
@@ -35,15 +40,19 @@ class IncItems extends Component {
     }
 }
 
-const mapStateToProps = state => {
+interface State {
+    IncList: any[];
+}
+
+const mapStateToProps = (state: State) => {
     return {
         IncList: state.IncList
     }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch: Function) => {
     return {
-        deleteSingleItem: (id) => dispatch(actions.deletePersonPlus(id))
+        deleteSingleItem: (id: number) => dispatch(actions.deletePersonPlus(id))
     }
 }
 

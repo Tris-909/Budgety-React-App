@@ -84,7 +84,12 @@ const ErrorMessage = styled.div`
 
 `;
 
-class AddBar extends Component {
+interface Props {
+    AddPersonPlus: Function;
+    AddPersonMinus: Function;
+}
+
+class AddBar extends Component<Props> {
     state = {
         singleItem: {
             des: '',
@@ -95,8 +100,9 @@ class AddBar extends Component {
         isPlus: true,
         isValid: true
     }
-    
-    onTypeChangeHandler = (event) => {
+
+
+    onTypeChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         let newDes = event.target.value;
         let newObj = {...this.state.singleItem, des: newDes}
         this.setState({
@@ -104,7 +110,7 @@ class AddBar extends Component {
         });
     }
     
-    onValueChangeHandler = (event) => {
+    onValueChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         let newValue = (event.target.value);
         let newObj = {...this.state.singleItem, val: newValue}
         this.setState({
@@ -118,7 +124,7 @@ class AddBar extends Component {
         });
     }
 
-    onClickHandler = (isPlus) => {
+    onClickHandler = (isPlus: boolean) => {
         let currentDate = new Date();
         let date = currentDate.getDate();
         let month = currentDate.getMonth(); //Be careful! January is 0 not 1
@@ -148,7 +154,7 @@ class AddBar extends Component {
         let valid = true;
         for (var i = 0; i < curValueArray.length; i++) {
             let thisOne = curValueArray[i];
-            if (parseInt(thisOne) === "NaN") {
+            if ( isNaN(parseInt(thisOne)) ) {
                 valid = false;
             }
         }
@@ -184,17 +190,22 @@ class AddBar extends Component {
     }
 }
 
-const mapStateToProps = state => {
+interface State {
+    IncList: any[];
+    ExpList: any[];
+}
+
+const mapStateToProps = (state: State) => {
     return {
         IncList: state.IncList,
         ExpList: state.ExpList
     }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch: Function ) => {
     return {
-        AddPersonPlus: (newItem) => dispatch(actions.addPersonPlus(newItem)),
-        AddPersonMinus: (newItem) => dispatch(actions.addPersonMinus(newItem))
+        AddPersonPlus: (newItem: object) => dispatch(actions.addPersonPlus(newItem)),
+        AddPersonMinus: (newItem: object) => dispatch(actions.addPersonMinus(newItem))
     }
 }
 

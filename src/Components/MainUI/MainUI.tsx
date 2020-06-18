@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import TotalInc from './TotalInc/TotalInc';
 import TotalExp from './TotalExp/TotalExp';
 import styled from 'styled-components';
@@ -32,26 +32,36 @@ const LayOut = styled.div`
     background-position: center;
 `;
 
-class MainUI extends Component {
+type Props = {
+    TotalOfIncome?: number;
+    TotalOfExpense?: number;
+}
+
+class MainUI extends React.Component<Props, State> {
     render() {
         let date = new Date();
         const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-        let thisMonth =monthNames[date.getMonth()];
+        let thisMonth = monthNames[date.getMonth()];
         let thisYear = date.getFullYear();
         return(
             <LayOut>
                 <Intro>Availabel Budget in {thisMonth} {thisYear} :</Intro>
-                <TotalString> {this.props.TotalOfIncome - this.props.TotalOfExpense} </TotalString>
-                <TotalInc totalInc={this.props.TotalOfIncome} />
+                <TotalString> {this.props.TotalOfIncome! - this.props.TotalOfExpense!} </TotalString>
+                <TotalInc totalInc={this.props.TotalOfIncome!} />
                 <TotalExp 
-                    totalExp={this.props.TotalOfExpense} 
-                    percentages={((this.props.TotalOfExpense/(this.props.TotalOfIncome))*100).toFixed(2)  }   />
+                    totalExp={this.props.TotalOfExpense!} 
+                    percentages={((this.props.TotalOfExpense!/(this.props.TotalOfIncome!))*100).toFixed(2)  }   />
             </LayOut>
         );
     }
 }
 
-const mapStateToProps = state => {
+interface State {
+    TotalInc : string;
+    TotalExp : string;
+}
+
+const mapStateToProps = (state: State) => {
     return {
         TotalOfIncome: parseFloat(state.TotalInc),
         TotalOfExpense: parseFloat(state.TotalExp)

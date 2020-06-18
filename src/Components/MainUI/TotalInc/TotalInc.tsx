@@ -23,8 +23,11 @@ const Number = styled.p`
     font-size: 16px;
 `;
 
+interface Props {
+    totalInc: number
+}
 
-const totalInc = (props) => {
+const totalInc: React.FC<Props> = (props) => {
     return(
         <Inc>
             <Text>Income</Text>
